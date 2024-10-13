@@ -19,7 +19,7 @@ export default function AppHeader() {
   const [select, setSelect] = useState(false);
   const [coin, setCoin] = useState(null);
   const [modal, setModal] = useState(false);
-  const [drawer, setDrawer] = useState(false);
+  const [drawer, setDrawer] = useState(true);
   const { crypto } = useCrypto();
   useEffect(() => {
     const keypress = (event) => {
