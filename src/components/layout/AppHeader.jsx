@@ -14,12 +14,11 @@ const headerStyle = {
   justifyContent: "space-between",
 };
 
-
 export default function AppHeader() {
   const [select, setSelect] = useState(false);
   const [coin, setCoin] = useState(null);
   const [modal, setModal] = useState(false);
-  const [drawer, setDrawer] = useState(true);
+  const [drawer, setDrawer] = useState(false);
   const { crypto } = useCrypto();
   useEffect(() => {
     const keypress = (event) => {
@@ -31,10 +30,9 @@ export default function AppHeader() {
     return () => document.removeEventListener("keypress", keypress);
   }, []);
   function handleSelect(value) {
-    setCoin(crypto.find((c) => c.id === value))
-    setModal(true)
+    setCoin(crypto.find((c) => c.id === value));
+    setModal(true);
   }
-
 
   return (
     <Layout.Header style={headerStyle}>
@@ -62,16 +60,20 @@ export default function AppHeader() {
           </Space>
         )}
       />
-      <Button type="primary" onClick={() => setDrawer(true)}>Add asset</Button>
-      <Modal
-        open={modal}
-        onCancel={() => setModal(false)}
-        footer={null}
-      >
+      <Button type="primary" onClick={() => setDrawer(true)}>
+        Add asset
+      </Button>
+      <Modal open={modal} onCancel={() => setModal(false)} footer={null}>
         <CoinInfoModal coin={coin} />
       </Modal>
-      <Drawer width={600} title="Add asset" onClose={() => setDrawer(false)} open={drawer}>
-        <AddAssetForm/>
+      <Drawer
+        width={600}
+        title="Add asset"
+        onClose={() => setDrawer(false)}
+        open={drawer}
+        destroyOnClose
+      >
+        <AddAssetForm onClose={() => setDrawer(false)} />
       </Drawer>
     </Layout.Header>
   );
