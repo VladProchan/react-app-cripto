@@ -37,7 +37,7 @@ export default function PortfolioChart() {
         display: "flex",
         marginBottom: "1rem",
         justifyContent: "center",
-        height: 600,
+        height: 400,
       }}
     >
       <Pie data={data} />
